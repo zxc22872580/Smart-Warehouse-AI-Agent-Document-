@@ -1,0 +1,28 @@
+schema: spec-driven
+
+context: |
+  Project: Smart Warehouse AI Agent — Document Understanding and Inventory Anomaly Decision Agent.
+  Repository: https://github.com/john19991225-commits/-
+  Tech stack: Python 3.11+, Streamlit UI (app.py), SQLite (database/repository.py),
+  deterministic rule & analytics modules (domain/rules.py, analytics/checks.py),
+  OCR adapters (ocr/providers.py, ocr/parser.py), bounded planner (agent/planner.py, agent/service.py),
+  and IEEEtran conference manuscript (smart_warehouse_ai_agent.tex).
+  Safety invariants:
+  - NO_WMS_WRITE: Agent never mutates production WMS/ERP; test DB writes require human confirmation.
+  - NO_UNSUPPORTED_CLAIM: Findings and recommendations must link to evidence IDs or DB rows.
+  - NO_SILENT_CORRECTION: Corrections and dispositions must preserve actor, reason, and trace_id.
+  - BOUNDED_EXECUTION: Explicit tool allowlist (7 tools) and max step limit (8 steps).
+  - FAIL_SAFE: Empty files, missing OCR dependencies, or rule/stock issues escalate to HUMAN_REVIEW_REQUIRED or FAILED.
+  Evidence honesty policy: Distinguish Implemented MVP from Planned Target Design; keep unrun benchmarks marked Not Run.
+
+rules:
+  proposal:
+    - Clearly separate Implemented MVP scope from Planned Target Design.
+    - Identify affected modules (agent, ocr, analytics, domain, database, overleaf).
+  specs:
+    - Use ### Requirement: headings with RFC 2119 keywords (MUST, SHALL, SHOULD) kept concise under 500 characters.
+    - Include at least one #### Scenario: block per requirement using GIVEN/WHEN/THEN bullets.
+  design:
+    - Preserve strict boundaries between bounded planner orchestration, deterministic tools, and human confirmation.
+  tasks:
+    - Include verification commands (unittest, compileall, openspec validate --all --strict).
